@@ -1,9 +1,12 @@
 <mxfile host="65bd71144e">
     <diagram id="49Mg_zPkEfMoZrLlu6bA" name="Page-1">
-        <mxGraphModel dx="501" dy="501" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="413" math="0" shadow="0">
+        <mxGraphModel dx="487" dy="1860" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="583" pageHeight="413" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <mxCell id="12" value="transfer" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+                    <mxGeometry x="202" y="70" width="180" height="200" as="geometry"/>
+                </mxCell>
                 <mxCell id="3" value="白い悪魔&lt;br&gt;type: Gtype" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
                     <mxGeometry x="70" y="155" width="30" height="60" as="geometry"/>
                 </mxCell>
@@ -13,14 +16,11 @@
                 <mxCell id="5" value="赤いの&lt;br&gt;type: Ztype&lt;br&gt;" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" parent="1" vertex="1">
                     <mxGeometry x="500" y="290" width="30" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="6" value="transferWhite" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+                <mxCell id="6" value="transferGtype" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
                     <mxGeometry x="242" y="120" width="100" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="7" value="transferGreen" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
-                    <mxGeometry x="242" y="180" width="100" height="40" as="geometry"/>
-                </mxCell>
-                <mxCell id="8" value="transferRed" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
-                    <mxGeometry x="242" y="240" width="100" height="40" as="geometry"/>
+                <mxCell id="8" value="transferZtype" style="ellipse;whiteSpace=wrap;html=1;verticalAlign=middle;" parent="1" vertex="1">
+                    <mxGeometry x="242" y="200" width="100" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="9" value="" style="endArrow=none;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="6" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -28,10 +28,10 @@
                         <mxPoint x="340" y="190" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="10" value="" style="endArrow=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="7" edge="1">
+                <mxCell id="10" value="" style="endArrow=none;html=1;entryX=1;entryY=0.35;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" target="8" edge="1">
                     <mxGeometry width="50" height="50" relative="1" as="geometry">
                         <mxPoint x="480" y="70" as="sourcePoint"/>
-                        <mxPoint x="340" y="190" as="targetPoint"/>
+                        <mxPoint x="342" y="200" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="11" value="" style="endArrow=none;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" parent="1" target="8" edge="1">

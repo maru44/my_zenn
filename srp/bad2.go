@@ -8,20 +8,8 @@ var (
 )
 
 /*******************************
-			utility
+	utility
 *******************************/
-
-type transferR interface {
-	transferRed(string, int) int
-}
-
-type transferG interface {
-	tranferGreen(string, int) int
-}
-
-type transferW interface {
-	transferWhite(string, int) int
-}
 
 type MobileSuit struct {
 	weight int
@@ -29,12 +17,19 @@ type MobileSuit struct {
 	name   string
 }
 
+type transfer interface {
+	transferGtype(string, int) int
+	transferZtype(string, int) int
+}
+
 type Gtype struct {
 	MobileSuit
+	transfer
 }
 
 type Ztype struct {
 	MobileSuit
+	transfer
 }
 
 // 速度算出
@@ -42,8 +37,8 @@ func (m *MobileSuit) calculateSpeedIndex() float32 {
 	return float32(m.engine) / float32(m.weight)
 }
 
-// ザクタイプ
-func (z *Ztype) transferZaku(field string, seconds int) int {
+// Ztype 移動距離算出
+func (z *Ztype) transferZtype(field string, seconds int) int {
 	var transfer int
 	switch field {
 	case space:
@@ -77,40 +72,38 @@ func (g *Gtype) transferGtype(field string, seconds int) int {
 }
 
 /*******************************
-		  具体的な値
+	instance
 *******************************/
 
 type red struct {
 	Ztype
-	transferR
 }
 
 type green struct {
 	Ztype
-	transferG
 }
 
 type white struct {
 	Gtype
-	transferW
 }
 
+// white 移動距離算出
 func (w *white) transferWhite(field string, seconds int) int {
 	return w.transferGtype(field, seconds)
 }
 
-// 移動距離算出
+// green 移動距離算出
 func (g *green) transferGreen(field string, seconds int) int {
-	return g.transferZaku(field, seconds)
+	return g.transferZtype(field, seconds)
 }
 
-// 移動距離算出
+// red 移動距離算出
 func (r *red) transferRed(field string, seconds int) int {
-	return r.transferZaku(field, seconds)
+	return r.transferZtype(field, seconds) * 3
 }
 
 /*******************************
-			utility
+	function
 *******************************/
 
 func main() {
@@ -142,6 +135,7 @@ func main() {
 			},
 		},
 	}
+
 	transferWhite := white.transferWhite(field, 200)
 	transferGreen := green.transferGreen(field, 200)
 	transferRed := red.transferRed(field, 200)
