@@ -14,39 +14,46 @@ const noFilePath2 = "./no2.json"
 
 const writeString = "AAAAAAAAAAAAAAA"
 
+type Sample struct {
+	Name    string `json:"name"`
+	Old     int    `json:"old,omitempty"`
+	Explain string `json:"explain"`
+}
+
 func main() {
-	AppendJson()
-	OverWrite()
 }
 
-func AppendJson() {
+func AppendJson(fileName string, object interface{}) {
 	isNew := false
-	logFile, err := os.OpenFile(filePath, os.O_RDWR, 0600)
-	if err != nil && err.Error() == fmt.Sprintf("open %s: no such file or directory", filePath) {
+	file, err := os.OpenFile(fileName, os.O_RDWR, 0600)
+	if err != nil && err.Error() == fmt.Sprintf("open %s: no such file or directory", fileName) {
 		isNew = true
-		logFile, _ = os.OpenFile(filePath, os.O_RDWR|os.O_CREATE, 0600)
-		_, err = logFile.Write([]byte("[]"))
+		file, _ = os.OpenFile(fileName, os.O_RDWR|os.O_CREATE, 0600)
+		_, err = file.Write([]byte("[]"))
 	}
-	defer logFile.Close()
-	fi, err := logFile.Stat()
+	defer file.Close()
+	fi, err := file.Stat()
 	leng := fi.Size()
+
+	json_, err := json.Marshal(object)
+
 	if isNew {
-		_, err = logFile.WriteAt([]byte(fmt.Sprintf(`"%s"]`, writeString)), leng-1)
+		_, err = file.WriteAt([]byte(fmt.Sprintf(`%s]`, json_)), leng-1)
 	} else {
-		_, err = logFile.WriteAt([]byte(fmt.Sprintf(`,"%s"]`, writeString)), leng-1)
+		_, err = file.WriteAt([]byte(fmt.Sprintf(`,%s]`, json_)), leng-1)
 	}
 }
 
-func OverWrite() {
-	logFile, err := os.OpenFile(filePath2, os.O_RDWR|os.O_CREATE, 0600)
+func OverWrite(fileName string, object interface{}) {
+	file, err := os.OpenFile(fileName, os.O_RDWR|os.O_CREATE, 0600)
 	if err != nil {
 		fmt.Print(err)
 	}
-	defer logFile.Close()
+	defer file.Close()
 
 	buf := make([]byte, 1024*1024)
 	for {
-		n, err := logFile.Read(buf)
+		n, err := file.Read(buf)
 		if n == 0 {
 			break
 		}
@@ -58,10 +65,9 @@ func OverWrite() {
 	idx := bytes.IndexByte(buf, 0)
 	buf = buf[:idx]
 
-	var lst []string
-	err = json.Unmarshal(buf, &lst)
-	lst = append(lst, writeString)
-
-	json_, err := json.Marshal(lst)
-	logFile.WriteAt(json_, 0)
+	var lst []interface{}
+	json.Unmarshal(buf, &lst)
+	lst = append(lst, object)
+	json_, _ := json.Marshal(lst)
+	file.WriteAt(json_, 0)
 }
