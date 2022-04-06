@@ -41,7 +41,7 @@ type ext struct {
 
 var bornThisWay = gene[ext]{
     Name: "Gaga",
-    ext: ext{
+    Extra: ext{
         Age: 0,
         BornAt: time.Now(),
     },
