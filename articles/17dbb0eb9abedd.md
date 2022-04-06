@@ -1,5 +1,5 @@
 ---
-title: "genericsのjsonを埋め込みたかった"
+title: "genericsのjsonでも無名埋め込みしたかった"
 emoji: "🦖"
 type: "tech" # tech: 技術記事 / idea: アイデア
 topics: ["go"]
