@@ -44,7 +44,7 @@ var bornThisWay = gene[ext]{
     ext: ext{
         Age: 0,
         BornAt: time.Now(),
-    }
+    },
 }
 ```
 
